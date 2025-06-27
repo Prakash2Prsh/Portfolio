@@ -799,19 +799,24 @@
     </footer>
 
     <script>
-        // Create rocket animations
-        function createRocket() {
-            const rocket = document.createElement('div');
-            rocket.className = 'rocket';
-            rocket.style.left = Math.random() * 100 + '%';
-            rocket.style.animationDelay = Math.random() * 5 + 's';
-            rocket.style.animationDuration = (20 + Math.random() * 10) + 's';
-            
-            // Random colors for rockets
-            const colors = ['#4a90e2', '#e74c3c', '#2ecc71', '#f39c12'];
-            const color = colors[Math.floor(Math.random() * colors.length)];
-            rocket.style.background = `linear-gradient(180deg, ${color}, ${color}aa)`;
-            
-            document.getElementById('bgAnimation').appendChild(rocket);
+// Create rocket animations
+function createRocket() {
+    const rocket = document.createElement('div');
+    rocket.className = 'rocket';
+    rocket.style.left = Math.random() * 100 + '%';
+    rocket.style.animationDelay = Math.random() * 5 + 's';
+    rocket.style.animationDuration = (20 + Math.random() * 10) + 's';
+    
+    // Random colors for rockets
+    const colors = ['#4a90e2', '#e74c3c', '#2ecc71', '#f39c12'];
+    const color = colors[Math.floor(Math.random() * colors.length)];
+    rocket.style.background = `linear-gradient(180deg, ${color}, ${color}aa)`;
+    
+    document.getElementById('bgAnimation').appendChild(rocket);
 
-            setTimeout(() => {
+    // Remove rocket after its animation ends
+    const duration = parseFloat(rocket.style.animationDuration) * 1000; // convert to ms
+    setTimeout(() => {
+        rocket.remove();
+    }, duration + 500); // small buffer for safety
+}
