@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prakash S - Aerospace Engineer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0d0d0d;
+            color: #e5e5e5;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Animated Background with Rockets */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, #0d0d0d 0%, #1a1a1a 50%, #0d0d0d 100%);
+        }
+
+        .rocket {
+            position: absolute;
+            width: 8px;
+            height: 30px;
+            background: linear-gradient(180deg, #4a90e2 0%, #2c5aa0 100%);
+            border-radius: 50% 50% 0 0;
+            animation: rocketFly 25s linear infinite;
+            opacity: 0.3;
+        }
+
+        .rocket::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 4px solid transparent;
+            border-right: 4px solid transparent;
+            border-top: 8px solid #e74c3c;
+            opacity: 0.8;
+        }
+
+        @keyframes rocketFly {
+            0% {
+                transform: translateY(100vh) translateX(-50px) rotate(15deg);
+                opacity: 0;
+            }
+            5% {
+                opacity: 0.3;
+            }
+            95% {
+                opacity: 0.3;
+            }
+            100% {
+                transform: translateY(-100px) translateX(50px) rotate(15deg);
+                opacity: 0;
+            }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(13, 13, 13, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(74, 144, 226, 0.1);
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            gap: 3rem;
+        }
+
+        nav a {
+            color: #b8b8b8;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            position: relative;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        nav a:hover {
+            color: #4a90e2;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: #4a90e2;
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-content h1 {
+            font-size: 4.5rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            color: #ffffff;
+            letter-spacing: 2px;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.5s forwards;
+        }
+
+        .hero-content .subtitle {
+            font-size: 1.3rem;
+            color: #4a90e2;
+            margin-bottom: 0.5rem;
+            font-weight: 400;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.7s forwards;
+        }
+
+        .hero-content .description {
+            font-size: 1.1rem;
+            color: #888;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.9s forwards;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, #4a90e2, #357abd);
+            border: none;
+            color: white;
+            padding: 12px 30px;
+            font-size: 1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            opacity: 0;
+            animation: fadeInUp 1s ease 1.1s forwards;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(74, 144, 226, 0.3);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Sections */
+        .section {
+            padding: 100px 0;
+            margin: 0 auto;
+            max-width: 1200px;
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+
+        .section h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 4rem;
+            color: #ffffff;
+            font-weight: 300;
+            letter-spacing: 1px;
+            position: relative;
+        }
+
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, #4a90e2, #357abd);
+        }
+
+        /* Cards */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background: rgba(26, 26, 26, 0.8);
+            border-radius: 10px;
+            padding: 2.5rem;
+            border: 1px solid rgba(74, 144, 226, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(74, 144, 226, 0.3);
+            background: rgba(26, 26, 26, 0.9);
+        }
+
+        .card h3 {
+            color: #4a90e2;
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+            font-weight: 500;
+        }
+
+        .card p {
+            color: #b8b8b8;
+            line-height: 1.7;
+        }
+
+        /* Skills Section */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .skill-category {
+            background: rgba(26, 26, 26, 0.6);
+            border-radius: 10px;
+            padding: 2rem;
+            border: 1px solid rgba(74, 144, 226, 0.1);
+        }
+
+        .skill-category h3 {
+            color: #4a90e2;
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .skill-item {
+            background: rgba(74, 144, 226, 0.1);
+            color: #e5e5e5;
+            padding: 0.6rem 1.2rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(74, 144, 226, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .skill-item:hover {
+            background: rgba(74, 144, 226, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* My Work Gallery */
+        .work-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .work-item {
+            background: rgba(26, 26, 26, 0.8);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid rgba(74, 144, 226, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .work-item:hover {
+            transform: translateY(-5px);
+            border-color: rgba(74, 144, 226, 0.3);
+        }
+
+        .work-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #2c3e50, #4a90e2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 1.1rem;
+        }
+
+        .work-content {
+            padding: 1.5rem;
+        }
+
+        .work-content h4 {
+            color: #4a90e2;
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .work-content p {
+            color: #b8b8b8;
+            font-size: 0.95rem;
+        }
+
+        /* Publications */
+        .publication-item {
+            background: rgba(26, 26, 26, 0.8);
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(74, 144, 226, 0.1);
+            border-left: 4px solid #4a90e2;
+        }
+
+        .publication-item h4 {
+            color: #ffffff;
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .publication-status {
+            color: #4a90e2;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .publication-item p {
+            color: #b8b8b8;
+            line-height: 1.6;
+        }
+
+        /* Experience Timeline */
+        .experience-item {
+            display: flex;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .experience-date {
+            min-width: 150px;
+            color: #4a90e2;
+            font-weight: 500;
+            padding-right: 2rem;
+        }
+
+        .experience-content {
+            flex: 1;
+            background: rgba(26, 26, 26, 0.8);
+            padding: 2rem;
+            border-radius: 10px;
+            border: 1px solid rgba(74, 144, 226, 0.1);
+        }
+
+        .experience-content h4 {
+            color: #ffffff;
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-content .company {
+            color: #4a90e2;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .experience-content ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .experience-content li {
+            color: #b8b8b8;
+            margin-bottom: 0.5rem;
+            padding-left: 1rem;
+            position: relative;
+        }
+
+        .experience-content li::before {
+            content: '▸';
+            color: #4a90e2;
+            position: absolute;
+            left: 0;
+        }
+
+        /* Contact Form */
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(26, 26, 26, 0.8);
+            border: 1px solid rgba(74, 144, 226, 0.2);
+            border-radius: 5px;
+            color: #e5e5e5;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #4a90e2;
+            box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.1);
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(13, 13, 13, 0.95);
+            text-align: center;
+            padding: 3rem 0;
+            border-top: 1px solid rgba(74, 144, 226, 0.1);
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            color: #b8b8b8;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-item:hover {
+            color: #4a90e2;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.8rem;
+            }
+            
+            .section h2 {
+                font-size: 2rem;
+            }
+            
+            nav ul {
+                gap: 1.5rem;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .experience-item {
+                flex-direction: column;
+            }
+            
+            .experience-date {
+                min-width: auto;
+                margin-bottom: 1rem;
+                padding-right: 0;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation" id="bgAnimation"></div>
+
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#publications">Publications</a></li>
+            <li><a href="#work">My Work</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Prakash S</h1>
+            <p class="subtitle">Aerospace Engineering Student</p>
+            <p class="description">Research Enthusiast</p>
+            <a href="#about" class="cta-button">Explore Portfolio</a>
+        </div>
+    </section>
+
+    <section id="about" class="section">
+        <h2>About Me</h2>
+        <div class="cards-grid">
+            <div class="card">
+                <h3>Academic Excellence</h3>
+                <p>Currently pursuing BE in Aerospace Engineering at RV College of Engineering with a GPA of 8.56/10. Simultaneously pursuing BSc in Physics, Chemistry, and Mathematics to strengthen scientific foundation.</p>
+            </div>
+            <div class="card">
+                <h3>Research Focus</h3>
+                <p>Active researcher in molecular dynamics, materials science, and space technology. Working on cutting-edge projects from maraging steel precipitation to galactic cosmic ray shielding for spacecraft applications.</p>
+            </div>
+            <div class="card">
+                <h3>Practical Engineering</h3>
+                <p>Team Antariksh member specializing in aerostructures with hands-on experience in SRAD rocket development, composite manufacturing, and preparing for international aerospace competitions.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="section">
+        <h2>Experience</h2>
+        <div class="experience-item">
+            <div class="experience-date">2023 - Present</div>
+            <div class="experience-content">
+                <h4>Aerostructures Subsystem Engineer & Sponsorship Executive</h4>
+                <div class="company">Team Antariksh: Space Technology Student Club</div>
+                <ul>
+                    <li>Working on structural aspects of SRAD solid motor model rockets</li>
+                    <li>Contributed to Ananta and Lakshya through fiberglass layups, nose cone design</li>
+                    <li>Managing manufacturing and integration processes</li>
+                    <li>Developing two 10k ft SRAD rockets for IREC-2026</li>
+                    <li>Leading sponsorship activities and outreach programs</li>
+                </ul>
+            </div>
+        </div>
+        <div class="experience-item">
+            <div class="experience-date">2023 - Present</div>
+            <div class="experience-content">
+                <h4>SPARK Prefect</h4>
+                <div class="company">The IUCEE Student Chapter of RVCE</div>
+                <ul>
+                    <li>Leading and organizing activities and events as Prefect of Activities & Events</li>
+                    <li>Participated in IUCEE Annual Student Forum 2024 Interdisciplinary Bootcamp</li>
+                    <li>Coordinating student engagement and technical development programs</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="section">
+        <h2>Featured Projects</h2>
+        <div class="cards-grid">
+            <div class="card">
+                <h3>Mission Aarohan: Ananta SRAD Rocket</h3>
+                <p>Successfully developed and launched a student-researched rocket reaching 1161.4m apogee with fiberglass airframe and solid J-class propulsion system. Complete end-to-end development and testing.</p>
+            </div>
+            <div class="card">
+                <h3>Project Lakshya: IN-SPACe Competition</h3>
+                <p>Currently developing a 1000m apogee SRAD rocket with deployable CANSAT payload for India's premier model rocketry competition. Features advanced recovery systems.</p>
+            </div>
+            <div class="card">
+                <h3>Mission Rudra: IREC-2026</h3>
+                <p>Working on two 10,000ft apogee rockets for Spaceport America Cup, featuring advanced airbrakes, boat tail design, and precision landing systems for international competition.</p>
+            </div>
+            <div class="card">
+                <h3>Electro-Magnetic Assisted Ion/Plasma Thruster</h3>
+                <p>Low-cost thruster prototype leveraging electrostatic acceleration and magnetic confinement, achieving measurable thrust with sustainable materials for transformative STEM education.</p>
+            </div>
+            <div class="card">
+                <h3>Space Debris Management System</h3>
+                <p>Innovative system using laser fragmentation and Electrodynamic Tethering for detection, de-orbiting, and controlled Earth re-entry of small space debris.</p>
+            </div>
+            <div class="card">
+                <h3>Dual Impeller Centrifugal Turbopump</h3>
+                <p>CAD design for high-performance turbopump inspired by SpaceX Merlin and Raptor engines, featuring dual impeller configuration for enhanced efficiency.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="publications" class="section">
+        <h2>Research & Publications</h2>
+        <div class="publication-item">
+            <h4>Molecular Dynamics Study of Precipitation and Reverted Austenite Formation in Maraging Steel</h4>
+            <div class="publication-status">2024 - Ongoing | Manuscript Under Progress</div>
+            <p>Conducting advanced molecular dynamics research on maraging steel to study precipitate formation, austenite evolution, and morphological characteristics. Collaborating with peers and professors for publication in peer-reviewed journal.</p>
+        </div>
+        <div class="publication-item">
+            <h4>FLUKA Monte Carlo Simulation and Analysis of Galactic Cosmic Ray Shielding Using Hybrid Graphene-Ceramic Composites for Spacecrafts</h4>
+            <div class="publication-status">Ongoing Research</div>
+            <p>Developing comprehensive FLUKA-based radiation shielding framework analyzing hybrid graphene-ceramic composites for deep-space applications. Focus on GCR protection for long-duration space missions.</p>
+        </div>
+        <div class="publication-item">
+            <h4>Combustion Analysis and Design Optimization of Methane-Hydrogen Blends for Pulse Detonation Engines</h4>
+            <div class="publication-status">Ongoing Research</div>
+            <p>Optimizing methane-hydrogen fuel ratios using computational fluid dynamics for improved detonation efficiency and reduced deflagration-to-detonation transition distance in pulse detonation engines.</p>
+        </div>
+        <div class="publication-item">
+            <h4>Molecular Dynamics Analysis of Wear Mechanisms in Sports Footwear Sole Materials</h4>
+            <div class="publication-status">ICSE-2025 | Abstract Accepted</div>
+            <p>Evaluating stress-induced degradation in PU, PLA, and EVA materials for enhanced durability and sustainability. Accepted for presentation at International Conference on Sports Engineering (ICSE) - 2025, Delhi.</p>
+        </div>
+        <div class="publication-item">
+            <h4>Molecular Dynamics Simulation of Biodegradable Nanocomposites for Pollution Control</h4>
+            <div class="publication-status">Ongoing Research</div>
+            <p>Designing biodegradable polymer-nanomaterial composites for pollutant adsorption with comprehensive sustainability analysis and environmental impact assessment.</p>
+        </div>
+    </section>
+
+    <section id="work" class="section">
+        <h2>My Work</h2>
+        <div class="work-gallery">
+            <div class="work-item">
+                <div class="work-image">CAD Models & Simulations</div>
+                <div class="work-content">
+                    <h4>Rocket Design Portfolio</h4>
+                    <p>Complete CAD assemblies of SRAD rockets including structural analysis, fluid dynamics simulations, and manufacturing drawings.</p>
+                </div>
+            </div>
+            <div class="work-item">
+                <div class="work-image">ANSYS & CFD Analysis</div>
+                <div class="work-content">
+                    <h4>Simulation Results</h4>
+                    <p>Comprehensive finite element analysis, thermal simulations, and computational fluid dynamics studies for aerospace applications.</p>
+                </div>
+            </div>
+            <div class="work-item">
+                <div class="work-image">Molecular Dynamics</div>
+                <div class="work-content">
+                    <h4>Materials Research</h4>
+                    <p>Advanced molecular dynamics simulations using LAMMPS for materials characterization and property prediction.</p>
+                </div>
+            </div>
+            <div class="work-item">
+                <div class="work-image">Manufacturing Drawings</div>
+                <div class="work-content">
+                    <h4>Technical Documentation</h4>
+                    <p>Detailed engineering drawings, assembly instructions, and manufacturing specifications for rocket components.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="section">
+        <h2>Technical Skills</h2>
+        <div class="skills-container">
+            <div class="skill-category">
+                <h3>Programming Languages</h3>
+                <div class="skill-list">
+                    <div class="skill-item">Python</div>
+                    <div class="skill-item">C/C++</div>
+                    <div class="skill-item">JavaScript</div>
+                    <div class="skill-item">HTML/CSS</div>
+                    <div class="skill-item">MATLAB</div>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h3>CAD & Design</h3>
+                <div class="skill-list">
+                    <div class="skill-item">SolidWorks</div>
+                    <div class="skill-item">CATIA</div>
+                    <div class="skill-item">PTC Creo</div>
+                    <div class="skill-item">Fusion 360</div>
+                    <div class="skill-item">Onshape</div>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h3>Simulation & Analysis</h3>
+                <div class="skill-list">
+                    <div class="skill-item">ANSYS</div>
+                    <div class="skill-item">Star CCM+</div>
+                    <div class="skill-item">ABAQUS</div>
+                    <div class="skill-item">LAMMPS</div>
+                    <div class="skill-item">FLUKA</div>
+                    <div class="skill-item">OpenRocket</div>
+                    <div class="skill-item">RASaero</div>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h3>Specialized Skills</h3>
+                <div class="skill-list">
+                    <div class="skill-item">Propellant Casting</div>
+                    <div class="skill-item">Composite Layups</div>
+                    <div class="skill-item">System Integration</div>
+                    <div class="skill-item">CFD Analysis</div>
+                    <div class="skill-item">MD Simulations</div>
+                    <div class="skill-item">Drone Piloting</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="education" class="section">
+        <h2>Education</h2>
+        <div class="cards-grid">
+            <div class="card">
+                <h3>Bachelor of Engineering - Aerospace</h3>
+                <p><strong>RV College of Engineering, Bengaluru</strong><br>
+                2023 - Present | GPA: 8.56/10.0<br>
+                Currently in II Year/4th Semester, actively engaged in R&D projects and aerospace domain development.</p>
+            </div>
+            <div class="card">
+                <h3>Bachelor of Science</h3>
+                <p><strong>Indira Gandhi National Open University</strong><br>
+                2025 - Present | Physics, Chemistry, Mathematics<br>
+                Pursuing additional scientific foundation to complement aerospace engineering studies.</p>
+            </div>
+            <div class="card">
+                <h3>Class XII - Science</h3>
+                <p><strong>Christ Junior College, Bengaluru</strong><br>
+                2021 - 2023 | Score: 95%<br>
+                Specialized in Physics, Chemistry, Mathematics, and Biology with exceptional performance.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section">
+        <h2>Contact</h2>
+        <div class="contact-form">
+            <form>
+                <div class="form-row">
+                    <div class="form-group">
+                        <input type="text" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" placeholder="Your Email" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="text" placeholder="Subject" required>
+                </div>
+                <div class="form-group">
+                    <textarea rows="5" placeholder="Your Message" required></textarea>
+                </div>
+                <button type="submit" class="cta-button">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="contact-info">
+            <a href="mailto:prakashs.prsh@gmail.com" class="contact-item">prakashs.prsh@gmail.com</a>
+            <a href="tel:+919900984383" class="contact-item">+91 9900984383</a>
+            <a href="https://linkedin.com/in/prakashprsh" class="contact-item">LinkedIn</a>
+            <a href="https://github.com/Prakash2Prsh" class="contact-item">GitHub</a>
+        </div>
+        <p style="color: #666;">&copy; 2025 Prakash S. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Create rocket animations
+        function createRocket() {
+            const rocket = document.createElement('div');
+            rocket.className = 'rocket';
+            rocket.style.left = Math.random() * 100 + '%';
+            rocket.style.animationDelay = Math.random() * 5 + 's';
+            rocket.style.animationDuration = (20 + Math.random() * 10) + 's';
+            
+            // Random colors for rockets
+            const colors = ['#4a90e2', '#e74c3c', '#2ecc71', '#f39c12'];
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            rocket.style.background = `linear-gradient(180deg, ${color}, ${color}aa)`;
+            
+            document.getElementById('bgAnimation').appendChild(rocket);
+
+            setTimeout(() => {
